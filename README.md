@@ -6,7 +6,7 @@
   </a>
 </p>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/da1e88fb-4fbc-48a4-b8fa-7ca55800ab81/deploy-status)](https://app.netlify.com/sites/affectionate-keller-1a8489/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/345786ce-9ea2-48de-860f-aa59d005780c/deploy-status)](https://app.netlify.com/sites/boring-hamilton-e9858e/deploys)
 
 <h1 align="center">
   Fauna Blog Comments with Gatsby Serverless Functions
