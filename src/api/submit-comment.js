@@ -72,11 +72,10 @@ export default async function handler(req, res) {
     res.status(405).send('Method not allowed');
   } else {
     const { email, ip, name, parentCommentId, slug, text } = req.body;
-    // const ip = req.headers['client-ip'];
     const userAgent = req.headers['user-agent'];
     let markedSpam;
     let akismetError;
-console.log('ip: ', ip);
+
     try {
       markedSpam = await spamCheck({
         email,
