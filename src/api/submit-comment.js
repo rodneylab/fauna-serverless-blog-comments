@@ -45,8 +45,8 @@ const spamCheck = async ({ email, ip, name, text, userAgent }) => {
 };
 
 const triggerRebuild = async () => {
-  if (!process.env.GATSBY_CLOUD_SITE_ID) {
-    return { successful: false, message: 'Gatsby Cloud Site ID is not defined.' };
+  if (!process.env.NETLIFY_BUILD_HOOK_ID) {
+    return { successful: false, message: 'Netlify build hook ID is not defined.' };
   }
   try {
     const response = await axios({
