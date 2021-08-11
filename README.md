@@ -1,4 +1,4 @@
-<img src="./images/rodneylab-github-gatsby-starter-climate.png" alt="Rodney Lab gatsby-functions-fauna Github banner">
+<img src="./images/rodneylab-github-gatsby-starter-climate.png" alt="Rodney Lab fauna-serverless-blog-comments Github banner">
 
 <p align="center">
   <a aria-label="Open Rodney Lab site" href="https://rodneylab.com" rel="nofollow noopener noreferrer">
@@ -9,10 +9,10 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/da1e88fb-4fbc-48a4-b8fa-7ca55800ab81/deploy-status)](https://app.netlify.com/sites/affectionate-keller-1a8489/deploys)
 
 <h1 align="center">
-  Gatsby 3 Starter Climate
+  Fauna Blog Comments with Gatsby Serverless Functions
 </h1>
 
-[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/rodneylab/gatsby-starter-climate)
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/rodneylab/fauna-serverless-blog-comments)
 
 Boilerplate code for a <a aria-label="Vist the Gatsby website" href="https://www.gatsbyjs.org" rel="nofollow">Gatsby 3</a> blog using <a aria-label="Vist the Gatsby website" href="https://www.netlify.com/" rel="nofollow">Netlify</a> for hosting. Based on principles of:
 

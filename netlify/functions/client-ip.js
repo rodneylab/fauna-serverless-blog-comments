@@ -1,7 +1,7 @@
-exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
+exports.handler = async (event, _, callback) => {
   const ip = event.headers['client-ip'];
-  return { statusCode: 200, body: ip };
+  callback(null, {
+    statusCode: 200,
+    body: ip,
+  });
 };

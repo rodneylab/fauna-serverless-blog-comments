@@ -5,6 +5,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import BannerImage from './BannerImage';
 import CommentForm from './CommentForm';
+import Comments from './Comments';
 import { PureLayout as Layout } from './Layout';
 import { ExternalLink, TwitterMessageLink } from './Link';
 import { PureSEO as SEO } from './SEO';
@@ -16,6 +17,7 @@ const shortcodes = {
 };
 
 const PureBlogPost = ({ children, data }) => {
+  const { comments } = data;
   const { frontmatter, slug } = data.post;
   const { bannerImage, featuredImageAlt, seoMetaDescription, postTitle } = frontmatter;
   const { siteUrl } = data.site.siteMetadata;
@@ -35,6 +37,7 @@ const PureBlogPost = ({ children, data }) => {
           </section>
           <section>
             <CommentForm slug={slug} />
+            {comments.edges.length > 0 ? <Comments comments={comments.edges} /> : null}
           </section>
         </article>
       </Layout>
@@ -48,6 +51,18 @@ PureBlogPost.propTypes = {
       siteMetadata: PropTypes.shape({
         siteUrl: PropTypes.string,
       }),
+    }),
+    comments: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+        PropTypes.shape({
+          node: PropTypes.shape({
+            commentId: PropTypes.string,
+            date: PropTypes.string,
+            name: PropTypes.string,
+            text: PropTypes.text,
+          }),
+        }),
+      ),
     }),
     post: PropTypes.shape({
       slug: PropTypes.string,
