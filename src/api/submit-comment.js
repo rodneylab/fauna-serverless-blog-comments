@@ -2,7 +2,7 @@ import { AkismetClient } from 'akismet-api';
 import axios from 'axios';
 import faunadb from 'faunadb';
 
-const TRIGGER_REBUILD_ON_NEW_COMMENT = false;
+const TRIGGER_REBUILD_ON_NEW_COMMENT = true;
 
 const createComment = async ({ name, parentCommentId, text, markedSpam, slug }) => {
   try {
@@ -50,7 +50,7 @@ const triggerRebuild = async () => {
   }
   try {
     const response = await axios({
-      url: `https://webhook.gatsbyjs.com/hooks/data_source/publish/${process.env.GATSBY_CLOUD_SITE_ID}`,
+      url: `https://api.netlify.com/build_hooks/${process.env.NETLIFY_BUILD_HOOK_ID}`,
       method: 'POST',
     });
     return { successful: true, message: response };
