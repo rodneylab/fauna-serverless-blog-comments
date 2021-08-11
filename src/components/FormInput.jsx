@@ -10,6 +10,7 @@ const FormInput = ({
   pattern,
   register,
   required,
+  type,
 }) => (
   <>
     <label htmlFor={id} className="screen-reader-text">
@@ -22,6 +23,7 @@ const FormInput = ({
       aria-invalid={ariaInvalid}
       aria-required={required}
       placeholder={label}
+      type={type}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...register(label, { maxLength, pattern, required })}
     />
@@ -33,6 +35,7 @@ FormInput.defaultProps = {
   maxLength: 1024,
   pattern: null,
   required: false,
+  type: '',
 };
 
 FormInput.propTypes = {
@@ -45,6 +48,7 @@ FormInput.propTypes = {
   pattern: PropTypes.object,
   register: PropTypes.func.isRequired,
   required: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export { FormInput as default };

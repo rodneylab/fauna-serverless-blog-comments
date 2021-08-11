@@ -1,0 +1,75 @@
+@import '../../styles/styles.scss';
+.container {
+  width: 100%;
+  margin-top: $spacing-12;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $spacing-4;
+  margin: 0 auto;
+  width: 50%;
+
+  input,
+  textarea {
+    border: $spacing-px solid $color-theme-4;
+    border-radius: $spacing-1;
+    padding: $spacing-1;
+    font-size: $font-size-2;
+  }
+}
+
+.form-error {
+  color: $color-danger;
+}
+
+.form-button {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 50%;
+
+  input {
+    margin-top: $spacing-4;
+    margin-left: auto;
+    font-size: $font-size-2;
+    background-color: $color-theme-4;
+    color: $color-theme-3;
+    padding: $spacing-2;
+    border-style: none;
+    border-radius: $spacing-2;
+  }
+
+  input[aria-disabled=true] {
+    background-color: (lighten($color-theme-4, 40%));
+  }
+
+  input:focus,
+  input:hover {
+    cursor: pointer;
+  }
+}
+
+.success-text {
+  width: 100%;
+  background-color: $color-theme-4;
+  color: $color-theme-3;
+  border-radius: $spacing-2;
+  margin-top: $spacing-12;
+  padding: $spacing-2;
+  p {
+    margin-bottom: 0;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+  .form-input {
+    width: 90%;
+  }
+
+  .form-button {
+    width: 90%;
+  }
+}
