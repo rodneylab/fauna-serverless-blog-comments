@@ -36,9 +36,24 @@ export const LinkedinIcon = () => (
     <FeatherIcon icon="linkedin" />
   </span>
 );
+export const LogOutIcon = () => (
+  <span role="img" aria-label="log out">
+    <FeatherIcon icon="log-out" />
+  </span>
+);
 export const TelegramIcon = () => (
   <span role="img" aria-label="telegram">
     <FeatherIcon icon="send" />
+  </span>
+);
+export const ToggleLeftIcon = () => (
+  <span role="img" aria-label="toggle left">
+    <FeatherIcon icon="toggle-left" />
+  </span>
+);
+export const ToggleRightIcon = () => (
+  <span role="img" aria-label="toggle right">
+    <FeatherIcon icon="toggle-right" />
   </span>
 );
 export const TrashIcon = () => (
