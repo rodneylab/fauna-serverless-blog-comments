@@ -4,9 +4,9 @@ import 'dayjs/locale/en-gb';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { graphql, Link, navigate } from 'gatsby';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import PropTypes from 'prop-types';
 import Card from '../../components/Card';
 import {
   FlagIcon,

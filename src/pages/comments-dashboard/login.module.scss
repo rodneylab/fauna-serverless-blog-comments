@@ -1,5 +1,18 @@
 @import '../../styles/styles.scss';
+
 .container {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.content {
+  margin: auto;
+  max-width: $max-width-wrapper;
+  width: 100%;
+}
+
+.form-container {
   width: 100%;
   margin-top: $spacing-12;
 }
@@ -41,7 +54,7 @@
     border-radius: $spacing-2;
   }
 
-  input[aria-disabled=true] {
+  input[aria-disabled='true'] {
     background-color: (lighten($color-theme-4, 40%));
   }
 

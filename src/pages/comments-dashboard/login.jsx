@@ -1,6 +1,8 @@
 import axios from 'axios';
-import { navigate } from 'gatsby';
+import { graphql, navigate } from 'gatsby';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import FormInput from '../../components/FormInput';
 import {
@@ -8,9 +10,16 @@ import {
   isBrowser,
   setSessionStorage,
 } from '../../utilities/utilities';
-import { container, formButton, formError, formInput } from './login.module.scss';
+import {
+  container,
+  content,
+  formButton,
+  formContainer,
+  formError,
+  formInput,
+} from './login.module.scss';
 
-export default function CommentsDashboardlogin() {
+export default function CommentsDashboardLogin({ data }) {
   const [serverState, setServerState] = useState({ ok: true, message: '' });
   const [sessionSecret, setSessionSecret] = useState(getSessionStorageOrDefault('token', false));
   const [submitting, setSubmitting] = useState(false);
@@ -28,10 +37,10 @@ export default function CommentsDashboardlogin() {
     setServerState({ ok, message });
   };
 
-  const onSubmit = async (data, event) => {
+  const onSubmit = async (formData, event) => {
     try {
       setSubmitting(true);
-      const { Email: email, Password: password } = data;
+      const { Email: email, Password: password } = formData;
       const response = await axios({
         url: '/api/db-login',
         method: 'POST',
@@ -57,52 +66,82 @@ export default function CommentsDashboardlogin() {
     navigate('/comments-dashboard/');
   }
 
+  const { siteLanguage } = data.site.siteMetadata;
+
   return (
     <>
-      <h1>Login</h1>
-      <form className={container} onSubmit={handleSubmit(onSubmit)}>
-        <h3>Log in to the Comments dashboard:</h3>
-        <div className={formInput}>
-          <FormInput
-            ariaInvalid={!!errors.Email}
-            ariaLabel="Enter your email address"
-            id="user-email"
-            label="Email"
-            maxLength={64}
-            pattern={emailRegex}
-            register={register}
-            required
-          />
-          {errors.Email ? (
-            <span id="user-email-error" className={formError}>
-              <small>Please check your email address.</small>
-            </span>
-          ) : null}
+      <Helmet title="Comments dashboard login" htmlAttributes={{ lang: siteLanguage }} />
+      <Helmet>
+        <meta name="robots" content="noindex" />
+      </Helmet>
+      <main className={container}>
+        <div className={content}>
+          <h1>Log In</h1>
+          <form className={formContainer} onSubmit={handleSubmit(onSubmit)}>
+            <h2>Log in to the Comments dashboard:</h2>
+            <div className={formInput}>
+              <FormInput
+                ariaInvalid={!!errors.Email}
+                ariaLabel="Enter your email address"
+                id="user-email"
+                label="Email"
+                maxLength={64}
+                pattern={emailRegex}
+                register={register}
+                required
+              />
+              {errors.Email ? (
+                <span id="user-email-error" className={formError}>
+                  <small>Please check your email address.</small>
+                </span>
+              ) : null}
+            </div>
+            <div className={formInput}>
+              <FormInput
+                ariaInvalid={!!errors.Password}
+                ariaLabel="Enter your password"
+                id="user-password"
+                label="Password"
+                maxLength={72}
+                register={register}
+                type="password"
+                required
+              />
+              {errors.Password ? (
+                <span className={formError}>
+                  <small>Please enter your password.</small>
+                </span>
+              ) : null}
+            </div>
+            <div className={formButton}>
+              <input type="submit" aria-disabled={submitting} disabled={submitting} value="Login" />
+              {serverState.message ? (
+                <small className={serverState.ok ? '' : formError}>{serverState.message}</small>
+              ) : null}
+            </div>
+          </form>
         </div>
-        <div className={formInput}>
-          <FormInput
-            ariaInvalid={!!errors.Password}
-            ariaLabel="Enter your password"
-            id="user-password"
-            label="Password"
-            maxLength={72}
-            register={register}
-            type="password"
-            required
-          />
-          {errors.Password ? (
-            <span className={formError}>
-              <small>Please enter your password.</small>
-            </span>
-          ) : null}
-        </div>
-        <div className={formButton}>
-          <input type="submit" aria-disabled={submitting} disabled={submitting} value="Login" />
-          {serverState.message ? (
-            <small className={serverState.ok ? '' : formError}>{serverState.message}</small>
-          ) : null}
-        </div>
-      </form>
+      </main>
     </>
   );
 }
+
+CommentsDashboardLogin.propTypes = {
+  data: PropTypes.shape({
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        siteLanguage: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};
+
+export const query = graphql`
+  query commentsDashboardLoginQuery {
+    site {
+      siteMetadata {
+        siteLanguage
+      }
+    }
+  }
+`;
