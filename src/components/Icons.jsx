@@ -21,6 +21,11 @@ export const FacebookIcon = () => (
     <FeatherIcon icon="facebook" />
   </span>
 );
+export const FlagIcon = () => (
+  <span role="img" aria-label="flag">
+    <FeatherIcon icon="flag" />
+  </span>
+);
 export const GithubIcon = () => (
   <span role="img" aria-label="git hub">
     <FeatherIcon icon="github" />
@@ -34,6 +39,11 @@ export const LinkedinIcon = () => (
 export const TelegramIcon = () => (
   <span role="img" aria-label="telegram">
     <FeatherIcon icon="send" />
+  </span>
+);
+export const TrashIcon = () => (
+  <span role="img" aria-label="trash">
+    <FeatherIcon icon="trash" />
   </span>
 );
 export const TwitterIcon = () => (

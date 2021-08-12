@@ -4,6 +4,13 @@
   ul {
     list-style: none;
   }
+   button {
+     background-color: transparent;
+     border: solid $spacing-px-2 $color-theme-1;
+     border-radius: $spacing-1;
+     padding: $spacing-2;
+     cursor: pointer;
+   }
 }
 
 .date-text {

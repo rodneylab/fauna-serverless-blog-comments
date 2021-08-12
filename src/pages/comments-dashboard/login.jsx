@@ -2,13 +2,17 @@ import axios from 'axios';
 import { navigate } from 'gatsby';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { getSessionStorageOrDefault } from '../../utilities/utilities';
-import { container, formButton, formError, formInput } from './login.module.scss';
 import FormInput from '../../components/FormInput';
+import {
+  getSessionStorageOrDefault,
+  isBrowser,
+  setSessionStorage,
+} from '../../utilities/utilities';
+import { container, formButton, formError, formInput } from './login.module.scss';
 
 export default function CommentsDashboardlogin() {
   const [serverState, setServerState] = useState({ ok: true, message: '' });
-  const [sessionSecret, setSessionSecret] = useState(getSessionStorageOrDefault('id', false));
+  const [sessionSecret, setSessionSecret] = useState(getSessionStorageOrDefault('token', false));
   const [submitting, setSubmitting] = useState(false);
   const {
     register,
@@ -17,7 +21,7 @@ export default function CommentsDashboardlogin() {
   } = useForm();
 
   useEffect(() => {
-    sessionStorage.setItem('id', JSON.stringify(sessionSecret));
+    setSessionStorage('token', sessionSecret);
   }, [sessionSecret]);
 
   const handleServerResponse = (ok, message) => {
@@ -38,18 +42,18 @@ export default function CommentsDashboardlogin() {
       });
       const { secret } = response.data;
       setSessionSecret(secret);
-      setSubmitting(false);
       event.target.reset();
       navigate('/comments-dashboard/');
     } catch (error) {
       handleServerResponse(false, 'There was an error logging in.  Please try again.');
     }
+    setSubmitting(false);
   };
 
   const emailRegex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  if (sessionSecret) {
+  if (sessionSecret && isBrowser) {
     navigate('/comments-dashboard/');
   }
 

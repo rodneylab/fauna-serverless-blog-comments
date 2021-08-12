@@ -11,15 +11,15 @@ const getComments = async ({ secret, reporter }) => {
       secret,
       domain: 'db.us.fauna.com',
     });
-    const results = await client.query(q.Paginate(q.Match(q.Index(FAUNA_COMMENTS_INDEX), false)));
+    const results = await client.query(
+      q.Paginate(q.Match(q.Index(FAUNA_COMMENTS_INDEX), false, undefined)),
+    );
     return results.data.map(([ref, date, name, slug, text]) => ({
       commentId: ref.id,
       date,
       name,
-      // parentCommentId: parentCommentId || null,
       slug,
       text,
-      // verified: verified || false,
     }));
   } catch (error) {
     reporter.warn('Error setting up fauna fetch.  ', error.message);
