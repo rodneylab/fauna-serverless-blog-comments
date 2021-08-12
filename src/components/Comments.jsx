@@ -5,7 +5,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Card from './Card';
-import { container, dateText } from './Comments.module.scss';
+import { container, dateText, footer } from './Comments.module.scss';
 
 dayjs.extend(localizedFormat);
 dayjs.extend(relativeTime);
@@ -24,8 +24,10 @@ const Comments = ({ comments }) => (
             <Card>
               <h3>{name}</h3>
               <p>{text}</p>
-              <div className={dateText}>
-                <small>{dateString}</small>
+              <div className={footer}>
+                <small>
+                  <span className={dateText}>{dateString}</span>
+                </small>
               </div>
             </Card>
           </li>

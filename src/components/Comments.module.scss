@@ -6,7 +6,14 @@
   }
 }
 
+.footer {
+  margin-top: $spacing-4;
+}
+
 .date-text {
-  padding-top: $spacing-2;
-  color: $color-theme-1;
+  color: $color-theme-4;
+  border: solid $spacing-px $color-theme-1;
+  border-radius: $spacing-4;
+  padding: $spacing-2;
+  font-weight: $font-weight-bold;
 }
