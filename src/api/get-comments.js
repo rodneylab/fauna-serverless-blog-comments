@@ -67,7 +67,7 @@ export default async function handler(req, res) {
       if (!successful) {
         res.status(400).send(`Error retreiving comments${message ? `: ${message}` : '.'}`);
       } else {
-        res.status(200).send(JSON.stringify({ comments }));
+        res.status(200).json({ comments });
       }
     }
   }

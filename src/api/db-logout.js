@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     if (!dblogoutResult.successful) {
       res.status(400).send('Error logging out.');
     } else {
-      res.status(200).send(JSON.stringify(dblogoutResult, null, 2));
+      res.status(200).json(dblogoutResult);
     }
   }
 }

@@ -42,12 +42,13 @@ dayjs.locale('en-gb');
 
 export default function CommentsDashboard({ data }) {
   const [comments, setComments] = useState([]);
+  const [databaseUpdated, setDatabaseUpdated] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [rebuildMessage, setRebuildMessage] = useState('');
   const [sessionSecret, setSessionSecret] = useState(getSessionStorageOrDefault('token', false));
   const [showSpam, setShowSpam] = useState(true);
-  const [rebuildMessage, setRebuildMessage] = useState('');
-  const [databaseUpdated, setDatabaseUpdated] = useState(false);
 
-  if (!sessionSecret && isBrowser) {
+  if (!sessionSecret && !loggingOut && isBrowser) {
     navigate('/comments-dashboard/login');
   }
 
@@ -89,6 +90,7 @@ export default function CommentsDashboard({ data }) {
 
   const logout = async () => {
     try {
+      setLoggingOut(true);
       await axios({
         url: '/api/db-logout',
         method: 'POST',
@@ -97,7 +99,6 @@ export default function CommentsDashboard({ data }) {
         },
       });
       setSessionSecret('');
-      setSessionStorage('token', '');
       navigate('/');
     } catch (error) {
       console.log(error);
@@ -138,6 +139,10 @@ export default function CommentsDashboard({ data }) {
     }
   };
 
+  useEffect(() => {
+    setSessionStorage('token', sessionSecret);
+  }, [sessionSecret]);
+
   useEffect(async () => {
     if (sessionSecret) {
       await getComments();
@@ -151,7 +156,7 @@ export default function CommentsDashboard({ data }) {
     <>
       <Helmet title="Comments dashboard" htmlAttributes={{ lang: siteLanguage }} />
       <Helmet>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className={container}>
         <header>

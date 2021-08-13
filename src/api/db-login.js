@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     if (!dbloginResult.successful) {
       res.status(400).send('Error logging in.');
     } else {
-      res.status(200).send(JSON.stringify(dbloginResult, null, 2));
+      res.status(200).json(dbloginResult);
     }
   }
 }

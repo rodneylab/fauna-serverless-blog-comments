@@ -72,7 +72,7 @@ export default function CommentsDashboardLogin({ data }) {
     <>
       <Helmet title="Comments dashboard login" htmlAttributes={{ lang: siteLanguage }} />
       <Helmet>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <main className={container}>
         <div className={content}>
