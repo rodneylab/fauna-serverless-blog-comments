@@ -66,6 +66,11 @@ export const TwitterIcon = () => (
     <FeatherIcon icon="twitter" />
   </span>
 );
+export const UploadCloudIcon = () => (
+  <span role="img" aria-label="upload cloud">
+    <FeatherIcon icon="upload-cloud" />
+  </span>
+);
 export const WireIcon = () => (
   <span role="img" aria-label="wire" style={{ width: '24px', height: '24px' }}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 275.4 226.2">

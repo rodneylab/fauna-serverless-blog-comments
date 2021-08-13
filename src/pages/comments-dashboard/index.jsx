@@ -14,6 +14,7 @@ import {
   ToggleLeftIcon,
   ToggleRightIcon,
   TrashIcon,
+  UploadCloudIcon,
 } from '../../components/Icons';
 import { M_SPACE_ENTITY } from '../../constants/entities';
 import {
@@ -30,6 +31,8 @@ import {
   dateText,
   headerContent,
   headerTitle,
+  rebuildContainer,
+  rebuildContent,
   title,
 } from './index.module.scss';
 
@@ -41,6 +44,8 @@ export default function CommentsDashboard({ data }) {
   const [comments, setComments] = useState([]);
   const [sessionSecret, setSessionSecret] = useState(getSessionStorageOrDefault('token', false));
   const [showSpam, setShowSpam] = useState(true);
+  const [rebuildMessage, setRebuildMessage] = useState('');
+  const [databaseUpdated, setDatabaseUpdated] = useState(false);
 
   if (!sessionSecret && isBrowser) {
     navigate('/comments-dashboard/login');
@@ -74,6 +79,8 @@ export default function CommentsDashboard({ data }) {
           moveToTrash: true,
         },
       });
+      setDatabaseUpdated(true);
+      setRebuildMessage('');
       getComments();
     } catch (error) {
       console.log(error);
@@ -97,6 +104,21 @@ export default function CommentsDashboard({ data }) {
     }
   };
 
+  const rebuild = async () => {
+    try {
+      await axios({
+        url: '/api/trigger-rebuild',
+        method: 'POST',
+        data: {
+          token: sessionSecret,
+        },
+      });
+      setRebuildMessage(`Rebuild started at ${dayjs().format('lll')}.`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const toggleMarkedSpam = async ({ commentId }) => {
     try {
       await axios({
@@ -108,6 +130,8 @@ export default function CommentsDashboard({ data }) {
           setMarkedSpamTo: !showSpam,
         },
       });
+      setDatabaseUpdated(true);
+      setRebuildMessage('');
       getComments();
     } catch (error) {
       console.log(error);
@@ -142,6 +166,25 @@ export default function CommentsDashboard({ data }) {
           </div>
         </header>
         <main className={content}>
+          <div className={rebuildContainer}>
+            {databaseUpdated ? (
+              <div className={rebuildContent}>
+                {rebuildMessage === '' ? (
+                  <>
+                    Rebuild the site to reflect recent changes?
+                    <button type="button" onClick={rebuild}>
+                      <span className={buttonContent}>
+                        Rebuild{M_SPACE_ENTITY}
+                        <UploadCloudIcon />
+                      </span>
+                    </button>
+                  </>
+                ) : (
+                  rebuildMessage
+                )}
+              </div>
+            ) : null}
+          </div>
           <div className={title}>
             {showSpam ? <h2>Comments marked spam</h2> : <h2>Comments not marked spam</h2>}
             <button type="button" onClick={() => setShowSpam(!showSpam)}>

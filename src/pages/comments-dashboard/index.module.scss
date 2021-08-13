@@ -10,6 +10,20 @@
   max-width: $max-width-wrapper;
 }
 
+.rebuild-content {
+  display: flex;
+  width: 100%;
+  border: $spacing-px-2 solid $color-theme-2;
+  border-radius: $spacing-3;
+  align-items: baseline;
+  margin: $spacing-0 auto;
+  padding: $spacing-4;
+  border-color: $color-theme-4;
+  background-color: $color-theme-4;
+  box-shadow: $spacing-0 $spacing-0 $spacing-1 $spacing-0 adjust-color($color-theme-4, $alpha: 0.2);
+  color: $color-theme-3;
+}
+
 .container {
   background-color: $color-theme-2;
   min-height: 100vh;
@@ -29,6 +43,13 @@
     border-radius: $spacing-1;
   }
 
+  .rebuild-content button {
+    margin-left: auto;
+    border: solid $spacing-px $color-theme-3;
+    border-radius: $spacing-1;
+    color: $color-theme-3;
+  }
+
   button:focus,
   button:hover {
     background: $color-theme-1;
@@ -39,7 +60,7 @@
     display: flex;
     button {
       border: solid $spacing-px-2 $color-theme-4;
-      border-radius: $spacing-1;
+      border-radius: $spacing-2;
       margin: $spacing-12 $spacing-4 $spacing-6;
     }
 
@@ -54,6 +75,14 @@
     button:focus,
     button:hover {
       background: $color-theme-4;
+    }
+  }
+
+  .rebuild-content {
+    button:focus,
+    button:hover {
+      color: $color-theme-4;
+      background-color: $color-theme-3;
     }
   }
 
@@ -75,6 +104,12 @@
   }
 }
 
+.rebuild-container {
+  display: flex;
+  width: 100%;
+  margin: $spacing-12 $spacing-0;
+}
+
 .header-title {
   margin: $spacing-0;
 }
@@ -88,6 +123,11 @@
 .comment-header {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
+
+  h4 {
+    font-size: $font-size-4;
+  }
 }
 
 .comment-footer {
