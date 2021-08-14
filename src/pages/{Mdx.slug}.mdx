@@ -29,21 +29,5 @@ export const pageQuery = graphql`
         }
       }
     }
-    comments: allCommentEntry(
-      sort: { fields: date, order: DESC }
-      filter: { slug: { eq: $slug } }
-    ) {
-      edges {
-        node {
-          id
-          name
-          slug
-          text
-          commentId
-          parentCommentId
-          date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
-        }
-      }
-    }
   }
 `;
