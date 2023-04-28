@@ -14,4 +14,7 @@
 
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/rodneylab/fauna-serverless-blog-comments)
 
-A demo site to show how the Fauna data API can be used with Gatsby Serverless Functions for blog comments.  More details to follow.
+> **Warning**
+> 🚧 The repo is no longer maintained check for vulnerabilities in dependencies if you decide to use it.
+
+A demo site to show how the Fauna data API can be used with Gatsby Serverless Functions for blog comments. More details to follow.
